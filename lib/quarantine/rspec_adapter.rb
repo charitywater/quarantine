@@ -105,6 +105,14 @@ class Quarantine
     def self.bind_on_test
       ::RSpec.configure do |config|
         config.after(:each) do |example|
+          begin
+            RSpec::Mocks.verify
+          rescue RSpec::Mocks::MockExpectationError => e
+            example.set_exception(e)
+          end
+
+          RSpec::Mocks.teardown
+
           result = Quarantine::RSpecAdapter.final_status(example)
           if result
             status, passed = result
