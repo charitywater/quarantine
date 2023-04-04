@@ -77,6 +77,9 @@ class Quarantine
       previously_quarantined = Quarantine::RSpecAdapter.quarantine.test_quarantined?(example) || metadata[:flaky]
 
       if example.exception
+        # save the exception so that we can record it in the quarantine_extra_attributes config
+        example.metadata[:quarantined_exception] = example.exception
+
         # The example failed _this try_.
         if metadata[:retry_attempts] + 1 == metadata[:retry]
           # The example failed all its retries - if it's already quarantined, keep it that way;
