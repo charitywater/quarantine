@@ -78,7 +78,7 @@ class Quarantine
 
       if example.exception
         # save the exception so that we can record it in the quarantine_extra_attributes config
-        example.metadata[:quarantined_exception] = example.exception
+        example.metadata[:quarantined_exception] = example.exception.to_s
 
         # The example failed _this try_.
         if metadata[:retry_attempts] + 1 == metadata[:retry]
