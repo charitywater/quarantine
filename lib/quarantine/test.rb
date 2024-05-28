@@ -7,6 +7,7 @@ class Quarantine
     const :id, String
     const :status, Symbol
     const :consecutive_passes, Integer
+    const :failure_count, Integer
     const :full_description, String
     const :location, String
     const :extra_attributes, T::Hash[T.untyped, T.untyped]
@@ -17,6 +18,7 @@ class Quarantine
         'id' => id,
         'last_status' => status.to_s,
         'consecutive_passes' => consecutive_passes,
+        'failure_count' => failure_count,
         'full_description' => full_description,
         'location' => location,
         'extra_attributes' => extra_attributes

@@ -58,6 +58,7 @@ describe Quarantine::Databases::DynamoDB do
       id: '1',
       status: :quarantined,
       consecutive_passes: 1,
+      failure_count: 0,
       full_description: 'quarantined_test_1',
       location: 'line 1',
       extra_attributes: { foo: '123' }
@@ -66,6 +67,7 @@ describe Quarantine::Databases::DynamoDB do
       id: '2',
       status: :quarantined,
       consecutive_passes: 1,
+      failure_count: 0,
       full_description: 'quarantined_test_2',
       location: 'line 2',
       extra_attributes: { foo: '-1' }
@@ -103,6 +105,7 @@ describe Quarantine::Databases::DynamoDB do
           id: 'some_id',
           status: :some_status,
           consecutive_passes: 1,
+          failure_count: 0,
           full_description: 'some description',
           location: 'some location',
           extra_attributes: { build_number: 'some build_number' }

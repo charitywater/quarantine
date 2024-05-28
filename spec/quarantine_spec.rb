@@ -25,6 +25,7 @@ describe Quarantine do
       'location' => 'line 1',
       'last_status' => 'quarantined',
       'consecutive_passes' => 1,
+      'failure_count' => 0,
       'extra_attributes' => {}
     }
 
@@ -34,6 +35,7 @@ describe Quarantine do
       'location' => 'line 2',
       'last_status' => 'quarantined',
       'consecutive_passes' => 1,
+      'failure_count' => 0,
       'extra_attributes' => {}
     }
 
@@ -82,6 +84,7 @@ describe Quarantine do
       expect(quarantine.tests[example.id].id).to eq(example.id)
       expect(quarantine.tests[example.id].status).to eq(:quarantined)
       expect(quarantine.tests[example.id].consecutive_passes).to eq(1)
+      expect(quarantine.tests[example.id].failure_count).to eq(0)
       expect(quarantine.tests[example.id].full_description).to eq(example.full_description)
       expect(quarantine.tests[example.id].location).to eq(example.location)
       expect(quarantine.tests[example.id].extra_attributes).to eq({})
@@ -94,6 +97,7 @@ describe Quarantine do
       expect(quarantine.tests[example.id].id).to eq(example.id)
       expect(quarantine.tests[example.id].status).to eq(:quarantined)
       expect(quarantine.tests[example.id].consecutive_passes).to eq(0)
+      expect(quarantine.tests[example.id].failure_count).to eq(1)
       expect(quarantine.tests[example.id].full_description).to eq(example.full_description)
       expect(quarantine.tests[example.id].location).to eq(example.location)
       expect(quarantine.tests[example.id].extra_attributes).to eq({})
@@ -107,6 +111,7 @@ describe Quarantine do
             'id' => example.id,
             'last_status' => 'quarantined',
             'consecutive_passes' => 5,
+            'failure_count' => 1,
             'full_description' => 'quarantined_test',
             'location' => 'line 1',
             'extra_attributes' => {}
@@ -119,6 +124,7 @@ describe Quarantine do
         expect(quarantine.tests[example.id].id).to eq(example.id)
         expect(quarantine.tests[example.id].status).to eq(:quarantined)
         expect(quarantine.tests[example.id].consecutive_passes).to eq(6)
+        expect(quarantine.tests[example.id].failure_count).to eq(0)
       end
 
       context 'with release_at_consecutive_passes' do
@@ -131,6 +137,7 @@ describe Quarantine do
               'id' => example.id,
               'last_status' => 'quarantined',
               'consecutive_passes' => 5,
+              'failure_count' => 0,
               'full_description' => 'quarantined_test',
               'location' => 'line 1',
               'extra_attributes' => {}
@@ -143,6 +150,7 @@ describe Quarantine do
           expect(quarantine.tests[example.id].id).to eq(example.id)
           expect(quarantine.tests[example.id].status).to eq(:passing)
           expect(quarantine.tests[example.id].consecutive_passes).to eq(6)
+          expect(quarantine.tests[example.id].failure_count).to eq(0)
         end
       end
     end
@@ -206,6 +214,7 @@ describe Quarantine do
           'id' => example.id,
           'last_status' => 'quarantined',
           'consecutive_passes' => 1,
+          'failure_count' => 0,
           'full_description' => 'quarantined_test',
           'location' => 'line 1',
           'extra_attributes' => {}

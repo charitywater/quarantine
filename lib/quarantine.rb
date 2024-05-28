@@ -75,6 +75,7 @@ class Quarantine
             id: t['id'],
             status: t['last_status'].to_sym,
             consecutive_passes: t['consecutive_passes'].to_i,
+            failure_count: t['failure_count'].to_i,
             full_description: t['full_description'],
             location: t['location'],
             extra_attributes: t['extra_attributes']
@@ -123,12 +124,14 @@ class Quarantine
     extra_attributes = @options[:extra_attributes] ? @options[:extra_attributes].call(example) : {}
 
     new_consecutive_passes = passed ? (@old_tests[example.id]&.consecutive_passes || 0) + 1 : 0
+    new_failure_count = passed ? (@old_tests[example.id]&.failure_count || 0) : (@old_tests[example.id]&.failure_count || 0) + 1
     release_at = @options[:release_at_consecutive_passes]
     new_status = !release_at.nil? && new_consecutive_passes >= release_at ? :passing : status
     test = Quarantine::Test.new(
       id: example.id,
       status: new_status,
       consecutive_passes: new_consecutive_passes,
+      failure_count: new_failure_count,
       full_description: example.full_description,
       location: example.location,
       extra_attributes: extra_attributes

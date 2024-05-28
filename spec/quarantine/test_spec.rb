@@ -8,6 +8,7 @@ describe Quarantine::Test do
         id: 'id',
         status: :quarantined,
         consecutive_passes: 1,
+        failure_count: 1,
         full_description: 'full_description',
         location: 'location',
         extra_attributes: { attr: 'value' }
@@ -26,6 +27,7 @@ describe Quarantine::Test do
         id: 'id',
         status: :quarantined,
         consecutive_passes: 1,
+        failure_count: 1,
         full_description: 'full_description',
         location: 'location',
         extra_attributes: { attr: 'value' }
@@ -34,6 +36,7 @@ describe Quarantine::Test do
         'id' => 'id',
         'last_status' => 'quarantined',
         'consecutive_passes' => 1,
+        'failure_count' => 1,
         'full_description' => 'full_description',
         'location' => 'location',
         'extra_attributes' => { attr: 'value' }
