@@ -98,7 +98,7 @@ class Quarantine
       log('Number of quarantined tests above failsafe limit; skipping recording')
     else
       begin
-        timestamp = Time.now.to_i / 1000 # Truncated millisecond from timestamp for reasons specific to Flexport
+        timestamp = Time.zone.now
         database.write_items(
           @options[:test_statuses_table_name],
           @tests.values.map { |item| item.to_hash.merge('updated_at' => timestamp) }
